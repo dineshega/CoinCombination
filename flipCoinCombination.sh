@@ -2,7 +2,7 @@
 
 echo "Welcome to Flip Coin Combination"
 
-declare -A doublet
+declare -A triplet
 
 h=0
 t=0
@@ -17,34 +17,57 @@ function coinFlip()
 			echo "T"
 		fi
 }
-
-for ((j=0; j<$flip ;j++))
+for ((k=0; k<$flip ;k++))
 do
-	doublet[$j]="$( coinFlip )""$( coinFlip )"
-	if [[ "${doublet[$j]}" == "HH" ]]
+	triplet[$k]="$( coinFlip )""$( coinFlip )""$( coinFlip )"
+	if [[ "${triplet[$k]}" == "HHH" ]]
 	then
-		hh=$((hh+1))
-		hhd=$( awk 'BEGIN {print ('$hh'/'$flip')*100}')
-	elif [[ "${doublet[$j]}" == "TT" ]]
+		hhh=$((hhh+1))
+		hhhtri=$( awk 'BEGIN {print ('$hhh'/'$flip')*100}')
+	elif [[ "${triplet[$k]}" == "HHT" ]]
 	then
-		tt=$((tt+1))
-		ttd=$( awk 'BEGIN {print ('$tt'/'$flip')*100}')
-	elif [[ "${doublet[$j]}" == "HT" ]]
+		hht=$((hht+1))
+		hhttri=$( awk 'BEGIN {print ('$hht'/'$flip')*100}')
+	elif [[ "${triplet[$k]}" == "HTH" ]]
 	then
-		ht=$((ht+1))
-		htd=$( awk 'BEGIN {print ('$ht'/'$flip')*100}')
+		hth=$((hth+1))
+		hthtri=$( awk 'BEGIN {print ('$hth'/'$flip')*100}')
+	elif [[ "${triplet[$k]}" == "HTT" ]]
+	then
+		htt=$((htt+1))
+		htttri=$( awk 'BEGIN {print ('$htt'/'$flip')*100}')
+	elif [[ "${triplet[$k]}" == "THH" ]]
+	then
+		thh=$((thh+1))
+		thhtri=$( awk 'BEGIN {print ('$thh'/'$flip')*100}')
+	elif [[ "${triplet[$k]}" == "THT" ]]
+	then
+		tht=$((tht+1))
+		thttri=$( awk 'BEGIN {print ('$tht'/'$flip')*100}')
+	elif [[ "${triplet[$k]}" == "TTH" ]]
+	then
+		tth=$((tth+1))
+		tthtri=$( awk 'BEGIN {print ('$tth'/'$flip')*100}')
 	else
-		th=$((th+1))
-		thd=$( awk 'BEGIN {print ('$th'/'$flip')*100}')
+		ttt=$((ttt+1))
+		ttttri=$( awk 'BEGIN {print ('$ttt'/'$flip')*100}')
 	fi
 done
-echo ${doublet[@]}
+echo ${triplet[@]}
 
-echo "doublet hh count: " $hh
-echo "doublet tt count: " $tt
-echo "doublet ht count: " $ht
-echo "doublet th count: " $th
-echo "hh percentage: " $hhd
-echo "tt percentage: " $ttd
-echo "ht percentage: " $htd
-echo "th percentage: " $thd
+echo "triplet hhh count: " $hhh
+echo "triplet hht count: " $hht
+echo "triplet hth count: " $hth
+echo "triplet htt count: " $htt
+echo "triplet thh count: " $thh
+echo "triplet tht count: " $tht
+echo "triplet tth count: " $tth
+echo "triplet ttt count: " $ttt
+echo "trpliet hhh precentage: " $hhhtri
+echo "triplet hht precentage: " $hhttri
+echo "triplet hth precentage: " $hthtri
+echo "triplet htt precentage: " $htttri
+echo "triplet thh precentage: " $thhtri
+echo "triplet tht precentage: " $thttri
+echo "triplet tth precentage: " $tthtri
+echo "triplet ttt precentage: " $ttttri
